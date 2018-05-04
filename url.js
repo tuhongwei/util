@@ -20,7 +20,7 @@ var decodeSearch = function(url){
 	if(!url){
 		return obj;
 	}
-	var search = url.match(/\?(.*)(?:(#|$))/);
+	var search = url.match(/\?([^#]*)/);
 	if(search){
 		var search0 = search[1].split('&');
 		for(var i=0; i<search0.length; i++){
@@ -39,8 +39,14 @@ var decodeHash = function(url){
 	if(!url){
 		return obj;
 	}
-	var e, r = /([^&;=]*)=?([^&;=]*)/g;
-	while(r.exec(url)){
-		hashParams[e[1]] = decodeURIComponent(e[2]);
+	var hash = url.match(/#([^\?]*)/);
+	if(hash){
+		var e, r = /([^&;=]+)=?([^&;=]*)/g, hash0 = hash[1];
+		while(e = r.exec(hash0)){
+			obj[e[1]] = decodeURIComponent(e[2]);
+		}
 	}
+	return obj;
 };
+
+
