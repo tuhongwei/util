@@ -41,4 +41,7 @@ var loadScript = function(url, callback){
 		}
 	}
 };
+var loadScripts = function(){
+
+};
 
