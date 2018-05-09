@@ -10,12 +10,12 @@ function forEach(obj, fn){
 	}
 	if(Object.prototype.toString.call(obj) === '[object Array]'){
 		for(var i=0, l=obj.length; i<l; i++){
-			fn.call(null, i, obj[i], obj);
+			fn.call(null, obj[i], i, obj);
 		}
 	}else{
 		for(var key in obj){
 			if(Object.prototype.hasOwnProperty.call(obj, key)){
-				fn.call(null, key, obj[key], obj);
+				fn.call(null, obj[key], key, obj);
 			}
 		}
 	}
@@ -29,7 +29,7 @@ function forEach(obj, fn){
 function merge(){
 	var deep = arguments[0] && typeof arguments[0] !== 'object';
 	var result = {};
-	function assignValue(key, val){
+	function assignValue(val, key){
 		if(deep && typeof result[key] === 'object' && typeof val === 'object'){
 			result[key] = merge(deep, result[key], val);
 		}else{
