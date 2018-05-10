@@ -22,8 +22,8 @@ function forEach(obj, fn){
 }
 
 /**
- * @params {[object|boolean]} [arguments[0]] 是否为深合并
- * @returns {object}
+ * @params {object|boolean} arguments[0] 是否为深合并
+ * @return {object}
  * @test: merge({a:1, b: {c: 2, d: 3}, e: 4, g: 5}, {a:2, b: {c: 3}, e: {f: 4}})
  */
 function merge(){
@@ -44,7 +44,7 @@ function merge(){
 }
 
 // 扩充函数作用域
-function bind(fn, thisArg){
+function bindFn(fn, thisArg){
 	return function wrap(){
 		var args = Array.prototype.slice.call(arguments, 0);
 		return fn.apply(thisArg, args);

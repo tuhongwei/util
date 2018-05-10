@@ -9,7 +9,7 @@ var emit = function(type, data){
 		return;
 	}
 	for(var i=0; i<listener[type].length; i++){
-		listener[type][i](data);
+		listener[type][i].apply({}, [data]);
 	}
 };
 
@@ -20,7 +20,7 @@ var eventRegist = function(type, callback, target){
 	}
 	if(target){
 		listener[type].push(function(data){
-			callback.apply(target, data);
+			callback.apply(target, [data]);
 		});
 	}else{
 		listener[type].push(callback);

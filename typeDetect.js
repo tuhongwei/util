@@ -6,7 +6,7 @@ var toString = Object.prototype.toString;
 
 /**
  * @param {Object}
- * @returns {boolean}
+ * @return {boolean}
  */
 function isArray(val){
 	return toString.call(val) === '[object Array]';
