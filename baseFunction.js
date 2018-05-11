@@ -51,7 +51,37 @@ function bindFn(fn, thisArg){
 	};
 }
 
+var assign;
+if(typeof Object.assign === 'function'){
+	assign = Object.assign;
+}else{
+	assign =  function(target){
+		if(target === undefined || target === null){
+			throw new TypeError('Cannot convert undefined or null to object');
+		}else{
+			var output = Object(target);
+			for(var i=1, l=arguments.length; i<l; i++){
+				var source = arguments[i];
+				if(source !== undefined && source !== null){
+					for(var k in source){
+						if(source.hasOwnProperty(k)){
+							output[k] = source[k];
+						}
+					}
+				}
+			}
+			return output;
+		}
+	};
+}
 // 对象继承
-function extend(a, b, thisArg){
-
+function inherit(child, base, properties){
+	var baseP = base.prototype,
+		childP;
+	childP = child.prototype = Object.create(baseP);
+	childP.constructor = child;
+	childP._super = baseP;
+	if(properties){
+		assign(childP, properties);
+	}
 }
