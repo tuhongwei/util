@@ -76,6 +76,11 @@ if(typeof Object.assign === 'function'){
 }
 // 对象继承
 function inherit(child, base, properties){
+	for(var k in base){
+		if(base.hasOwnProperty(key)){
+			child[k] = base[k];
+		}
+	}
 	var baseP = base.prototype,
 		childP;
 	childP = child.prototype = Object.create(baseP);
