@@ -2,7 +2,7 @@
  *DOM 操作 ->需要支持Promise
  */
 
-/* 操作类 */
+// 操作类 
 var addClass = function ($elem, name) {
 	if(!$elem.className.match(new RegExp("(\\s+|^)" + name + "(\\s+|$)"))){
 		$elem.className += ' '+name;
@@ -15,7 +15,7 @@ var hasClass = function ($elem, name){
 	return $elem.className.split(" ").indexOf(name) > -1;
 };
 
-/* 动态添加css 和 js */
+// 动态添加css 和 js 
 var loadStyle = function(url){
 	var link = document.createElement("link");
 	link.type = "text/css";
@@ -55,9 +55,7 @@ var loadScript = function(url, callback){
 		});
 	}
 };
-/**
- * 同一个数组里面是并行加载，不同数组之间按数组顺序依赖加载
- */
+// 同一个数组里面是并行加载，不同数组之间按数组顺序依赖加载
 var loadScripts = function(){
 	if(arguments.length < 1){
 		return;
@@ -85,4 +83,29 @@ var loadScripts = function(){
 		}
 	}
 };
+/**
+ * 获取图片自然宽高
+ * @param {Node} imgNode
+ * @param {Function} 回调
+ * IE8及以下不支持naturalWidth和naturalHeight
+ */
+function getImgNaturalSize (imgNode, cb) {
+	var naturalSize = {};
+	if(imgNode.complete) {
+		naturalSize.width = imgNode.naturalWidth;
+		naturalSize.height = imgNode.naturalHeight;
+		cb && cb(naturalSize);
+		return;
+	}
+    var img = new Image();
+    img.src = imgNode.src;
+    var timer = setInterval(function () { 
+		if(img.width > 0 || img.height > 0) {
+			clearInterval(timer);
+			naturalSize.width = img.width;
+			naturalSize.height = img.height;
+			cb && cb(naturalSize);
+		}
+	}, 40);
+}
 
