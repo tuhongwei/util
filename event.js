@@ -44,7 +44,7 @@ var eventOff = function(type, callback){
 };
 
 // 绑定事件
-var eventUtil = function(){
+var eventUtil = {
 	on: function(element, type, handler){
 		if(element.addEventListener){
 			element.addEventListener(type, handler, false);
