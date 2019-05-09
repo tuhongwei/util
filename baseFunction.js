@@ -90,3 +90,7 @@ function inherit(child, base, properties){
 		assign(childP, properties);
 	}
 }
+/**
+* @params {function}
+* @params {number}
+*/
