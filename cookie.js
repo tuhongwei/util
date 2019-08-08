@@ -22,10 +22,11 @@ var	setCookie = function(name, value, days, path){
 	path = path || "/";
 	document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=" + path;
 };
-var	removeCookie = function(name){
+var	removeCookie = function(name, path){
 	var exp = new Date();
 	exp.setTime(exp.getTime() - 1);
 	var val  = getCookie(name);
-	val && (document.cookie = name + "=; expires=" + exp.toGMTString());
+	path = path || "/";
+	val && (document.cookie = name + "=; expires=" + exp.toGMTString() + "; path=" + path);
 };
 
