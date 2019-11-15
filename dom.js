@@ -24,7 +24,7 @@ var loadStyle = function(url){
 	document.getElementsByTagName("head")[0].appendChild(link);
 };
 var loadScript = function(url, callback){
-	var reslove0;
+	var resolve0;
 	var script = document.createElement("script");
 	script.type = "text/javascript";
 	script.src = url;
@@ -35,8 +35,8 @@ var loadScript = function(url, callback){
 				script.onreadystatechange = null;
 				if(typeof callback === 'function'){
 					callback();
-				}else if(typeof reslove0 === 'function'){
-					reslove0();
+				}else if(typeof resolve0 === 'function'){
+					resolve0();
 				}
 			}
 		}
@@ -44,14 +44,14 @@ var loadScript = function(url, callback){
 		script.onload = function(){
 			if(typeof callback === 'function'){
 				callback();
-			}else if(typeof reslove0 === 'function'){
-				reslove0();
+			}else if(typeof resolve0 === 'function'){
+				resolve0();
 			}
 		}
 	}
 	if(typeof callback !== 'function'){
-		return new Promise(function(reslove, reject){
-			reslove0 = reslove;
+		return new Promise(function(resolve, reject){
+			resolve0 = resolve;
 		});
 	}
 };
