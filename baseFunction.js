@@ -91,6 +91,23 @@ function inherit(child, base, properties){
 	}
 }
 /**
-* @params {function}
-* @params {number}
+* 获取一个函数的单例
+* @params {function} 需要得到单例的函数
+* * @test 
+	function friend(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  var a = getSingle(friend)('a', 10);
+  var b = getSingle(friend)('b', 20);
+  console.log(a === b);
 */
+
+var getSingleton = (function() {
+  var result;
+  return function(fn) {
+    return function() {
+      return result || (result = new (fn.bind(this, ...arguments)));
+    }
+  }
+})();
